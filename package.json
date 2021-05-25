@@ -1,0 +1,27 @@
+{
+  "name": "michango-app-api",
+  "version": "1.0.0",
+  "description": "server for servicing michango app",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "npm run build && node ./dist/server.js",
+    "dev": "tsc -w nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabbymushi/michango-app-api.git"
+  },
+  "keywords": [
+    "michango",
+    "harusi",
+    "events"
+  ],
+  "author": "gabrielpatrickmushi@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabbymushi/michango-app-api/issues"
+  },
+  "homepage": "https://github.com/gabbymushi/michango-app-api#readme"
+}
