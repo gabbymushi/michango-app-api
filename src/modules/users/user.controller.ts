@@ -128,21 +128,6 @@ export const changePaymentPIN = async (req: any, res: Response) => {
     }
 }
 
-export const getBranchUsers = async (req: Request, res: Response) => {
-    try {
-        const { branchId } = req.params;
-
-        const user = await userService.getBranchUsers(branchId);
-
-        return res.status(200).json(user);
-    } catch (e) {
-        return res.status(400).json({
-            userMessage: 'Oops... Something went wrong, contact the admin...',
-            developerMessage: e.message
-        });
-    }
-}
-
 export const validatePaymentPin = async (req: any, res: Response) => {
     try {
         const { paymentPin } = req.body;

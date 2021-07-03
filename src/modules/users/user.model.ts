@@ -7,9 +7,7 @@ export enum USER_TYPES {
     ROOT = 'root'
 }
 export interface IUser extends Document {
-    firstName?: string,
-    middleName?: string,
-    lastName?: string,
+    fullName?: string,
     dob?: string,
     gender?: string,
     phoneNumber?: string,
@@ -24,19 +22,9 @@ export interface IUser extends Document {
 }
 
 const UserSchema = new Schema<IUser>({
-    firstName: {
+    fullName: {
         type: String,
         required: [true, 'First name is required!'],
-    },
-    middleName: {
-        type: String
-    },
-    lastName: {
-        type: String,
-        required: [true, 'Last name is required!'],
-    },
-    displayName: {
-        type: String
     },
     dob: {
         type: String,
@@ -87,10 +75,7 @@ UserSchema.methods = {
     toJSON() {
         return {
             _id: this._id,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            middleName: this.middleName,
-            displayName: this.displayName,
+            fullName: this.fullName,
             gender: this.gender,
             dob: this.dob,
             email: this.email,
