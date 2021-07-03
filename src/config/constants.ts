@@ -10,11 +10,6 @@ interface IConstants {
     AUTHORIZATION_SCHEME: any,
     SMS_API_ID: any,
     SMS_API_PASSWORD: any,
-    NIDA_API_SECRET: any,
-    NIDA_URL: any,
-    PAYMENT_URL: any,
-    PAYMENT_API_SECRET: any,
-    PAYMENT_CALLBACK_URL: any,
     PERPAGE: any
 }
 
@@ -52,21 +47,6 @@ export const constants: IConstants = {
 
     /**authorization scheme for jwt */
     AUTHORIZATION_SCHEME: 'Bearer',
-
-    /**secret key for generating nida api token */
-    NIDA_API_SECRET: process.env.NIDA_API_SECRET,
-
-    /**nida url */
-    NIDA_URL: process.env.NIDA_URL,
-
-    /** url for making payment */
-    PAYMENT_URL: process.env.PAYMENT_URL,
-
-    /** url for making payment */
-    PAYMENT_API_SECRET: process.env.PAYMENT_API_SECRET,
-
-    /** callback url for updating payment */
-    PAYMENT_CALLBACK_URL: process.env.PAYMENT_CALLBACK_URL,
 
     /** callback url for updating payment */
     PERPAGE: process.env.PERPAGE as unknown as number || 15

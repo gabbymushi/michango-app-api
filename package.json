@@ -33,5 +33,12 @@
   "bugs": {
     "url": "https://github.com/gabbymushi/michango-app-api/issues"
   },
-  "homepage": "https://github.com/gabbymushi/michango-app-api#readme"
+  "homepage": "https://github.com/gabbymushi/michango-app-api#readme",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.12",
+    "@types/jsonwebtoken": "^8.5.3",
+    "@types/morgan": "^1.9.2"
+  }
 }

@@ -1,5 +1,5 @@
 import { getUserByPhoneNumber, getVendorUserByPhoneNumber } from '../users/user.repository';
-import { TYPES } from '../users/user.model';
+import { USER_TYPES } from '../users/user.model';
 import jwt from 'jsonwebtoken';
 import { constants } from '../../config/constants';
 
@@ -12,29 +12,7 @@ export const login = async (body: any) => {
 
         const user = await getUserByPhoneNumber(phoneNumber);
 
-        if (user && user.comparePassword(password) && user.type === TYPES.USER) {
-            const authUser = user.toAuthJSON();
-            token = jwt.sign({ ...authUser }, constants.JWT_SECRET);
-            response = { user, token, status: 200 };
-        } else {
-            response = { userMessage: 'Wrong username or password.', user: {}, token, status: 401 };
-        }
-
-        return response;
-    } catch (e) {
-        throw new Error(e.message);
-    }
-}
-
-export const vendorLogin = async (body: any) => {
-    try {
-        let token = null;
-        let response;
-        const { phoneNumber, password } = body;
-
-        const user = await getVendorUserByPhoneNumber(phoneNumber);
-
-        if (user && user.comparePassword(password) && (user.type === TYPES.VENDOR || user.type === TYPES.VENDOR_ADMIN)) {
+        if (user && user.comparePassword(password) && user.type === USER_TYPES.USER) {
             const authUser = user.toAuthJSON();
             token = jwt.sign({ ...authUser }, constants.JWT_SECRET);
             response = { user, token, status: 200 };

@@ -15,20 +15,6 @@ export const login = async (req: Request, res: Response) => {
     }
 }
 
-export const vendorLogin = async (req: Request, res: Response) => {
-    try {
-        const { body } = req;
-        const user = await authService.vendorLogin(body);
-
-        return res.status(user.status).json(user);
-    } catch (e) {
-        return res.status(400).json({
-            userMessage: e.message,
-            developerMessage: e.message
-        });
-    }
-}
-
 export const isAuthenticated = (req: any, res: Response, next: NextFunction) => {
     try {
         const { authorization, } = req.headers;

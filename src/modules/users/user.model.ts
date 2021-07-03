@@ -1,5 +1,11 @@
 import { Schema, Document, model, Types } from 'mongoose';
 import bcrypt from 'bcryptjs';
+
+export enum USER_TYPES {
+    USER = 'user',
+    STAFF = 'staff',
+    ROOT = 'root'
+}
 export interface IUser extends Document {
     firstName?: string,
     middleName?: string,
@@ -10,6 +16,7 @@ export interface IUser extends Document {
     email?: string,
     password: string,
     displayName?: string,
+    type?: string
     comparePassword(candidatePassword: string): boolean,
     changePassword(password: string): any,
     hashPassword(password: string): string,
@@ -47,6 +54,12 @@ const UserSchema = new Schema<IUser>({
     },
     email: {
         type: String,
+        index: true
+    },
+    type: {
+        type: String,
+        enum: [USER_TYPES],
+        default: USER_TYPES.USER,
         index: true
     },
     password: {
