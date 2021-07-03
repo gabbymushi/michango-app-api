@@ -1,11 +1,11 @@
 import { Schema, Document, model } from 'mongoose';
 
-export interface ICategory extends Document {
+export interface IEvent extends Document {
     name: string,
     icon: string
 }
 
-const CategorySchema = new Schema({
+const EventSchema = new Schema({
     name: {
         type: String,
         required: [true, 'Name  is required!'],
@@ -18,4 +18,4 @@ const CategorySchema = new Schema({
     { timestamps: true }
 );
 
-export const Category = model<ICategory>('Category', CategorySchema);
+export const Event = model<IEvent>('Event', EventSchema);

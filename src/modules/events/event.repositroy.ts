@@ -1,52 +1,52 @@
-import { ICategory, Category } from './event.model';
+import { IEvent, Event } from './event.model';
 
-export const createCategory = async (body: ICategory) => {
+export const createEvent = async (body: IEvent) => {
     try {
-        const category = await Category.create(body);
+        const event = await Event.create(body);
 
-        return category;
+        return event;
     } catch (e) {
         throw new Error(e.message);
     }
 }
 
-export const getCategories = async (keyword: string) => {
+export const getEvents = async (keyword: string) => {
     try {
         const search = new RegExp('.*' + keyword + '.*', 'i');
 
-        const categories = await Category.find({ name: { $regex: search } });
+        const events = await Event.find({ name: { $regex: search } });
 
-        return categories;
+        return events;
     } catch (e) {
         throw new Error(e.message);
     }
 }
 
-export const getCategoryById = async (categoryId: string) => {
+export const getEventById = async (EventId: string) => {
     try {
-        const category = await Category.findOne({ _id: categoryId });
+        const event = await Event.findOne({ _id: EventId });
 
-        return category;
+        return event;
     } catch (e) {
         throw new Error(e.message);
     }
 }
 
-export const updateCategory = async (categoryId: string, body: ICategory) => {
+export const updateEvent = async (EventId: string, body: IEvent) => {
     try {
-        const category = await Category.findOneAndUpdate({ _id: categoryId }, { ...body }, { new: true });
+        const event = await Event.findOneAndUpdate({ _id: EventId }, { ...body }, { new: true });
 
-        return category;
+        return event;
     } catch (e) {
         throw new Error(e.message);
     }
 }
 
-export const deleteCategory = async (categoryId: string) => {
+export const deleteEvent = async (EventId: string) => {
     try {
-        const category = await Category.deleteOne({ _id: categoryId });
+        const event = await Event.deleteOne({ _id: EventId });
 
-        return category;
+        return Event;
     } catch (e) {
         throw new Error(e.message);
     }

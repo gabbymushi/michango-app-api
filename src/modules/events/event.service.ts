@@ -1,19 +1,19 @@
-import * as categoryRepository from './event.repositroy';
-import { ICategory } from './event.model';
+import * as eventRepository from './event.repositroy';
+import { IEvent } from './event.model';
 
-export const createCategory = async (body: ICategory) => {
+export const createEvent = async (body: IEvent) => {
     try {
-        const category = await categoryRepository.createCategory(body);
+        const Event = await eventRepository.createEvent(body);
 
-        return category;
+        return Event;
     } catch (e) {
         throw new Error(e.message);
     }
 }
 
-export const getCategories = async (name: string) => {
+export const getEvents = async (name: string) => {
     try {
-        const categories = await categoryRepository.getCategories(name);
+        const categories = await eventRepository.getEvents(name);
 
         return categories;
     } catch (e) {
@@ -21,31 +21,31 @@ export const getCategories = async (name: string) => {
     }
 }
 
-export const getCategoryById = async (categoryId: string) => {
+export const getEventById = async (EventId: string) => {
     try {
-        const category = await categoryRepository.getCategoryById(categoryId);
+        const Event = await eventRepository.getEventById(EventId);
 
-        return category;
+        return Event;
     } catch (e) {
         throw new Error(e.message);
     }
 }
 
-export const updateCategory = async (categoryId: string, body: ICategory) => {
+export const updateEvent = async (EventId: string, body: IEvent) => {
     try {
-        const category = await categoryRepository.updateCategory(categoryId, body);
+        const Event = await eventRepository.updateEvent(EventId, body);
 
-        return category;
+        return Event;
     } catch (e) {
         throw new Error(e.message);
     }
 }
 
-export const deleteCategory = async (categoryId: string) => {
+export const deleteEvent = async (EventId: string) => {
     try {
-        const category = await categoryRepository.deleteCategory(categoryId);
+        const Event = await eventRepository.deleteEvent(EventId);
 
-        return category;
+        return Event;
     } catch (e) {
         throw new Error(e.message);
     }

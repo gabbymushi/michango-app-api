@@ -1,12 +1,12 @@
 import { Request, RequestHandler, Response } from 'express';
-import * as categoryService from './event.service';
+import * as eventService from './event.service';
 
-export const createCategory = async (req: Request, res: Response) => {
+export const createEvent = async (req: Request, res: Response) => {
     try {
         const { body } = req;
-        const category = await categoryService.createCategory(body);
+        const Event = await eventService.createEvent(body);
 
-        return res.status(200).json(category);
+        return res.status(200).json(Event);
     } catch (e) {
         return res.status(400).json({
             userMessage: 'Oops... Something went wrong, contact the admin...',
@@ -15,10 +15,10 @@ export const createCategory = async (req: Request, res: Response) => {
     }
 }
 
-export const getCategories: RequestHandler = async (req, res) => {
+export const getEvents: RequestHandler = async (req, res) => {
     try {
         const { name } = req.query;
-        const categories = await categoryService.getCategories(name as unknown as string ?? '');
+        const categories = await eventService.getEvents(name as unknown as string ?? '');
 
         return res.status(200).json(categories);
     } catch (e) {
@@ -30,12 +30,12 @@ export const getCategories: RequestHandler = async (req, res) => {
     }
 }
 
-export const deleteCategory = async (req: Request, res: Response) => {
+export const deleteEvent = async (req: Request, res: Response) => {
     try {
-        const { categoryId } = req.params;
-        const category = await categoryService.deleteCategory(categoryId);
+        const { EventId } = req.params;
+        const Event = await eventService.deleteEvent(EventId);
 
-        return res.status(200).json(category);
+        return res.status(200).json(Event);
     } catch (e) {
         return res.status(400).json({
             userMessage: 'Oops... Something went wrong, contact the admin...',
@@ -44,12 +44,12 @@ export const deleteCategory = async (req: Request, res: Response) => {
     }
 }
 
-export const getCategoryById = async (req: Request, res: Response) => {
+export const getEventById = async (req: Request, res: Response) => {
     try {
-        const { categoryId } = req.params;
-        const category = await categoryService.getCategoryById(categoryId);
+        const { EventId } = req.params;
+        const Event = await eventService.getEventById(EventId);
 
-        return res.status(200).json(category);
+        return res.status(200).json(Event);
     } catch (e) {
         return res.status(400).json({
             userMessage: 'Oops... Something went wrong, contact the admin...',
@@ -58,13 +58,13 @@ export const getCategoryById = async (req: Request, res: Response) => {
     }
 }
 
-export const updateCategory = async (req: Request, res: Response) => {
+export const updateEvent = async (req: Request, res: Response) => {
     try {
-        const { categoryId } = req.params;
+        const { EventId } = req.params;
         const { body } = req;
-        const category = await categoryService.updateCategory(categoryId, body);
+        const Event = await eventService.updateEvent(EventId, body);
 
-        return res.status(200).json(category);
+        return res.status(200).json(Event);
     } catch (e) {
         return res.status(400).json({
             userMessage: 'Oops... Something went wrong, contact the admin...',
