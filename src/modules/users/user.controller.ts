@@ -85,32 +85,6 @@ export const getUserByPhoneNumber = async (req: Request, res: Response) => {
     }
 }
 
-export const verifyNIDA = async (req: Request, res: Response) => {
-    try {
-        const { nin } = req.body;
-
-        return res.status(200).json();
-    } catch (e) {
-        return res.status(400).json({
-            userMessage: 'Oops... Something went wrong, contact the admin...',
-            developerMessage: e.message
-        });
-    }
-}
-
-export const sendNIDAQuestion = async (req: Request, res: Response) => {
-    try {
-        const { nin, rqCode, answer } = req.body;
-
-        return res.status(200).json();
-    } catch (e) {
-        return res.status(400).json({
-            userMessage: 'Oops... Something went wrong, contact the admin...',
-            developerMessage: e.message
-        });
-    }
-}
-
 export const changePaymentPIN = async (req: any, res: Response) => {
     try {
         const { oldPaymentPin, paymentPin } = req.body;
