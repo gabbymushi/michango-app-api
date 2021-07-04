@@ -36,7 +36,6 @@ const ContributorSchema = new Schema<IContributor>({
     phoneNumber: {
         type: String,
         required: [true, 'Phone number is required!'],
-        unique: true,
         index: true
     },
     email: {
