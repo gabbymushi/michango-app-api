@@ -46,4 +46,4 @@ const ContributorSchema = new Schema<IContributor>({
     { timestamps: true }
 );
 
-export const Contributor = model<IContributor>('User', ContributorSchema);
+export const Contributor = model<IContributor>('Contributor', ContributorSchema);
