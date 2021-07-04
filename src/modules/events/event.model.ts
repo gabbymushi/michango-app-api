@@ -1,4 +1,4 @@
-import { Schema, Document, model } from 'mongoose';
+import { Schema, Document, model, Types } from 'mongoose';
 
 export interface IEvent extends Document {
     name: string,
@@ -16,7 +16,11 @@ const EventSchema = new Schema({
     },
     venue: {
         type: String
-    }
+    },
+    owners: [{
+        type: Types.ObjectId,
+        ref: 'User'
+    }]
 },
     { timestamps: true }
 );
