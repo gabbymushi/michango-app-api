@@ -2,18 +2,21 @@ import { Schema, Document, model } from 'mongoose';
 
 export interface IEvent extends Document {
     name: string,
-    icon: string
+    venue: string
+    date: string
 }
 
 const EventSchema = new Schema({
     name: {
         type: String,
-        required: [true, 'Name  is required!'],
+        required: [true, 'Event name  is required!'],
     },
-    icon: {
+    date: {
+        type: Date
+    },
+    venue: {
         type: String
     }
-
 },
     { timestamps: true }
 );
