@@ -1,38 +1,37 @@
 import { Schema, Document, model, Types } from 'mongoose';
-import bcrypt from 'bcryptjs';
+import { IEvent } from '../events/event.model';
 
-export enum USER_TYPES {
-    USER = 'user',
-    STAFF = 'staff',
-    ROOT = 'root'
-}
-export interface IUser extends Document {
-    fullName?: string,
-    dob?: string,
-    gender?: string,
+export interface IContributor extends Document {
+    fullName: string,
+    event: IEvent['_id'],
+    title: string,
     phoneNumber?: string,
     email?: string,
-    password: string,
-    displayName?: string,
-    type?: string
-    comparePassword(candidatePassword: string): boolean,
-    changePassword(password: string): any,
-    hashPassword(password: string): string,
-    toAuthJSON(): object,
+    amount: number,
+    balance: number
 }
 
-const UserSchema = new Schema<IUser>({
+const ContributorSchema = new Schema<IContributor>({
+    event: {
+        type: Types.ObjectId,
+        ref: 'Event',
+        required: [true, 'Event is required!'],
+    },
     fullName: {
         type: String,
-        required: [true, 'First name is required!'],
+        required: [true, 'Fullname is required!'],
     },
-    dob: {
+    title: {
         type: String,
-        required: [true, 'Birthday is required!'],
+        enum: ['Mr', 'Mrs', 'Miss', 'Dr', 'Eng']
     },
-    gender: {
-        type: String,
-        required: [true, 'Gender  is required!'],
+    amount: {
+        type: Number,
+        default: 0
+    },
+    balance: {
+        type: Number,
+        default: 0
     },
     phoneNumber: {
         type: String,
@@ -43,53 +42,9 @@ const UserSchema = new Schema<IUser>({
     email: {
         type: String,
         index: true
-    },
-    type: {
-        type: String,
-        enum: [USER_TYPES],
-        default: USER_TYPES.USER,
-        index: true
-    },
-    password: {
-        type: String,
-        required: [true, 'Phone number is required!']
     }
 },
     { timestamps: true }
 );
 
-UserSchema.methods = {
-    comparePassword(candidatePassword: string): boolean {
-        if (bcrypt.compareSync(candidatePassword, this.password)) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    changePassword(password: string) {
-        return this.update({ password: this.hashPassword(password) })
-    },
-    hashPassword(password: string): string {
-        return bcrypt.hashSync(password, 10);
-    },
-    toJSON() {
-        return {
-            _id: this._id,
-            fullName: this.fullName,
-            gender: this.gender,
-            dob: this.dob,
-            email: this.email,
-            phoneNumber: this.phoneNumber
-        };
-    }
-}
-
-UserSchema.pre("save", function (next) {
-    if (!this.isModified("password")) {
-        return next();
-    }
-    this.password = this.hashPassword(this.password);
-    next();
-});
-
-export const User = model<IUser>('User', UserSchema);
+export const Contributor = model<IContributor>('User', ContributorSchema);

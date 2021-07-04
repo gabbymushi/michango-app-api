@@ -1,15 +1,13 @@
 import express from 'express';
 const router = express.Router();
-import * as UserController from './contributor.controller';
+import * as ContributorController from './contributor.controller';
 import { isAuthenticated } from '../auth/auth.controller';
 
-router.get('/phone-number', UserController.getUserByPhoneNumber);
-router.get('/', UserController.getUsers);
-router.get('/:id', UserController.getUser);
-router.post('/', UserController.createUser);
-router.post('/validate-pin', isAuthenticated, UserController.validatePaymentPin);
-router.patch('/:id', UserController.updateUser);
-router.delete('/:id', UserController.deleteUser);
-router.post('/change-payment-pin', isAuthenticated, UserController.changePaymentPIN);
+router.get('/phone-number', ContributorController.getContributorByPhoneNumber);
+router.get('/', ContributorController.getContributors);
+router.get('/:id', ContributorController.getContributor);
+router.post('/', ContributorController.createContributor);
+router.patch('/:id', ContributorController.updateContributor);
+router.delete('/:id', ContributorController.deleteContributor);
 
-export const UserRoutes = router;
+export const ContributorRoutes = router;

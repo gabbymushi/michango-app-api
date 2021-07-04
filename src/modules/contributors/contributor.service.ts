@@ -1,17 +1,17 @@
-import { IUser, User } from './contributor.model';
-import * as userRepository from './contributor.repository';
+import { IContributor, Contributor } from './contributor.model';
+import * as ContributorRepository from './contributor.repository';
 
-export const createUser = async (body: any) => {
-    const session = await User.startSession();
+export const createContributor = async (body: any) => {
+    const session = await Contributor.startSession();
     session.startTransaction();
     try {
 
-        const user = await userRepository.createUser(body, session);
+        const Contributor = await ContributorRepository.createContributor(body, session);
 
         await session.commitTransaction();
         session.endSession();
 
-        return user;
+        return Contributor;
     } catch (e) {
         await session.abortTransaction();
         session.endSession();
@@ -21,16 +21,16 @@ export const createUser = async (body: any) => {
 }
 
 export const createAdmin = async (body: any) => {
-    const session = await User.startSession();
+    const session = await Contributor.startSession();
     session.startTransaction();
 
     try {
-        const user = await userRepository.createUser(body, session);
+        const Contributor = await ContributorRepository.createContributor(body, session);
 
         await session.commitTransaction();
         session.endSession();
 
-        return user;
+        return Contributor;
     } catch (e) {
         await session.abortTransaction();
         session.endSession();
@@ -39,38 +39,25 @@ export const createAdmin = async (body: any) => {
     }
 }
 
-export const getUsers = async () => {
-    return await userRepository.getUsers();
+export const getContributors = async () => {
+    return await ContributorRepository.getContributors();
 }
 
-export const getUser = async (userId: any) => {
-    return await userRepository.getUser(userId);
+export const getContributor = async (ContributorId: any) => {
+    return await ContributorRepository.getContributor(ContributorId);
 }
 
-export const deleteUser = async (userId: string) => {
-    return await userRepository.deleteUser(userId);
-
-}
-
-export const updateUser = async (userId: string, body: IUser) => {
-    return await userRepository.updateUser(userId, body);
+export const deleteContributor = async (ContributorId: string) => {
+    return await ContributorRepository.deleteContributor(ContributorId);
 
 }
 
-export const getUserByPhoneNumber = async (phoneNumber: any) => {
-    return await userRepository.getUserByPhoneNumber(phoneNumber);
+export const updateContributor = async (ContributorId: string, body: IContributor) => {
+    return await ContributorRepository.updateContributor(ContributorId, body);
+
 }
 
-export const isValidPyamentPIN = async (userId: string, paymentPIN: number) => {
-    const count = await userRepository.checkPaymentPIN(userId, paymentPIN);
-
-    return (count > 0 ? true : false);
+export const getContributorByPhoneNumber = async (phoneNumber: any) => {
+    return await ContributorRepository.getContributorByPhoneNumber(phoneNumber);
 }
 
-export const changePaymentPIN = async (userId: string, oldPaymentPin: number, paymentPIN: number) => {
-    if (!await isValidPyamentPIN(userId, oldPaymentPin)) {
-        throw new Error('Incorrect Payment PIN.');
-    }
-
-    return await userRepository.changePaymentPIN(userId, paymentPIN);
-}
