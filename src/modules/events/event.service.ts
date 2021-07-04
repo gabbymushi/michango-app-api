@@ -2,13 +2,7 @@ import * as eventRepository from './event.repositroy';
 import { IEvent } from './event.model';
 
 export const createEvent = async (body: IEvent) => {
-    try {
-        const Event = await eventRepository.createEvent(body);
-
-        return Event;
-    } catch (e) {
-        throw new Error(e.message);
-    }
+    return await eventRepository.createEvent(body);
 }
 
 export const getEvents = async (name: string) => {

@@ -3,7 +3,7 @@ const router = express.Router();
 import * as EventController from './event.controller';
 import { isAuthenticated } from '../auth/auth.controller';
 
-router.post('/', isAuthenticated, EventController.createEvent);
+router.post('/', EventController.createEvent);
 router.get('/', EventController.getEvents);
 router.get('/:eventId', isAuthenticated, EventController.getEventById);
 router.patch('/:eventId', isAuthenticated, EventController.updateEvent);

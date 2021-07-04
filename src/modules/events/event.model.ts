@@ -2,7 +2,7 @@ import { Schema, Document, model, Types } from 'mongoose';
 
 export interface IEvent extends Document {
     name: string,
-    venue: string
+    venue: string,
     date: string
 }
 
