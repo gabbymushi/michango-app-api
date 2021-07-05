@@ -5,8 +5,8 @@ import { isAuthenticated } from '../auth/auth.controller';
 
 router.post('/', EventController.createEvent);
 router.get('/', EventController.getEvents);
-router.get('/:eventId', isAuthenticated, EventController.getEventById);
-router.patch('/:eventId', isAuthenticated, EventController.updateEvent);
-router.delete('/:eventId', isAuthenticated, EventController.deleteEvent);
+router.get('/:eventId', EventController.getEventById);
+router.patch('/:eventId', EventController.updateEvent);
+router.delete('/:eventId', EventController.deleteEvent);
 
 export const EventRoutes = router;
