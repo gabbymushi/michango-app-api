@@ -13,7 +13,6 @@ export interface IUser extends Document {
     phoneNumber?: string,
     email?: string,
     password: string,
-    displayName?: string,
     type?: string
     comparePassword(candidatePassword: string): boolean,
     changePassword(password: string): any,
@@ -27,12 +26,10 @@ const UserSchema = new Schema<IUser>({
         required: [true, 'First name is required!'],
     },
     dob: {
-        type: String,
-        required: [true, 'Birthday is required!'],
+        type: String
     },
     gender: {
-        type: String,
-        required: [true, 'Gender  is required!'],
+        type: String
     },
     phoneNumber: {
         type: String,
