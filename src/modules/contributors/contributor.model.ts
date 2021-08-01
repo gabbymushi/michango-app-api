@@ -8,7 +8,7 @@ export interface IContributor extends Document {
     phoneNumber?: string,
     email?: string,
     amount: number,
-    balance: number
+    paidAmount: number
 }
 
 const ContributorSchema = new Schema<IContributor>({
@@ -25,11 +25,11 @@ const ContributorSchema = new Schema<IContributor>({
         type: String,
         enum: ['Mr', 'Mrs', 'Miss', 'Dr', 'Eng']
     },
-    amount: {
+    pledgedAmount: {
         type: Number,
         default: 0
     },
-    balance: {
+    paidAmount: {
         type: Number,
         default: 0
     },
