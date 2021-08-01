@@ -1,8 +1,13 @@
 import * as eventRepository from './event.repositroy';
 import { IEvent } from './event.model';
+import { createUser } from '../users/user.service';
 
-export const createEvent = async (body: IEvent) => {
-    return await eventRepository.createEvent(body);
+export const createEvent = async (body: any) => {
+    const { user, event } = body;
+
+    const createdUser = await createUser(user);
+
+    return await eventRepository.createEvent({ ...event, owners: [createdUser._id] });
 }
 
 export const getEvents = async (name: string) => {
