@@ -30,6 +30,22 @@ export const getEvents: RequestHandler = async (req, res) => {
     }
 }
 
+export const getEventsByOwnerId = async (req: any, res: Response) => {
+    try {
+        //const ownerId = req.authUser._id;
+        const ownerId = req.params.id;
+        const categories = await eventService.getEventsByOwnerId(ownerId);
+
+        return res.status(200).json(categories);
+    } catch (e) {
+
+        return res.status(400).json({
+            userMessage: 'Oops... Something went wrong, contact the admin...',
+            developerMessage: e.message
+        });
+    }
+}
+
 export const deleteEvent = async (req: Request, res: Response) => {
     try {
         const { EventId } = req.params;
