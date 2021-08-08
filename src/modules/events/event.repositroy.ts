@@ -22,6 +22,16 @@ export const getEvents = async (keyword: string) => {
     }
 }
 
+export const getEventsByOwnerId = async (ownerId: string) => {
+    try {
+        const events = await Event.find({ owners: ownerId });
+
+        return events;
+    } catch (e) {
+        throw new Error(e.message);
+    }
+}
+
 export const getEventById = async (EventId: string) => {
     try {
         const event = await Event.findOne({ _id: EventId });
