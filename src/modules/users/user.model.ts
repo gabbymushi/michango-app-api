@@ -17,7 +17,7 @@ export interface IUser extends Document {
     comparePassword(candidatePassword: string): boolean,
     changePassword(password: string): any,
     hashPassword(password: string): string,
-    toAuthJSON(): object,
+    toJSON(): any,
 }
 
 const UserSchema = new Schema<IUser>({

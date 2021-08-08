@@ -13,7 +13,7 @@ export const login = async (body: any) => {
         const user = await getUserByPhoneNumber(phoneNumber);
 
         if (user && user.comparePassword(password) && user.type === USER_TYPES.USER) {
-            const authUser = user.toAuthJSON();
+            const authUser = user.toJSON();
             token = jwt.sign({ ...authUser }, constants.JWT_SECRET);
             response = { user, token, status: 200 };
         } else {
