@@ -20,6 +20,16 @@ export const getEvents = async (name: string) => {
     }
 }
 
+export const getEventsByOwnerId = async (ownerId: string) => {
+    try {
+        const categories = await eventRepository.getEventsByOwnerId(ownerId);
+
+        return categories;
+    } catch (e) {
+        throw new Error(e.message);
+    }
+}
+
 export const getEventById = async (EventId: string) => {
     try {
         const Event = await eventRepository.getEventById(EventId);
