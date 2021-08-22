@@ -11,14 +11,8 @@ export const createContributor = async (body: IContributor, session: ClientSessi
     }
 }
 
-export const getContributors = async () => {
-    try {
-        const contributors = await Contributor.find();
-
-        return contributors;
-    } catch (e) {
-        throw new Error(e.message);
-    }
+export const getContributorsByEventId = (event: string) => {
+    return Contributor.find({ event });
 }
 
 export const getContributor = async (ContributorId: string) => {
