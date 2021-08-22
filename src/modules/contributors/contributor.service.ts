@@ -39,8 +39,8 @@ export const createAdmin = async (body: any) => {
     }
 }
 
-export const getContributors = async () => {
-    return await ContributorRepository.getContributors();
+export const getContributorsByEventId = (eventId: string) => {
+    return ContributorRepository.getContributorsByEventId(eventId);
 }
 
 export const getContributor = async (ContributorId: any) => {
