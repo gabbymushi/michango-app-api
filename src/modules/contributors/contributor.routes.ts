@@ -4,7 +4,7 @@ import * as ContributorController from './contributor.controller';
 import { isAuthenticated } from '../auth/auth.controller';
 
 router.get('/phone-number', ContributorController.getContributorByPhoneNumber);
-router.get('/', ContributorController.getContributors);
+//router.get('/', ContributorController.getContributors);
 router.get('/:id', ContributorController.getContributor);
 router.post('/', ContributorController.createContributor);
 router.patch('/:id', ContributorController.updateContributor);

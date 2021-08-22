@@ -15,11 +15,13 @@ export const createContributor = async (req: Request, res: Response) => {
     }
 }
 
-export const getContributors = async (req: Request, res: Response) => {
+export const getContributorsByEventId = async (req: Request, res: Response) => {
     try {
-        const Contributor = await ContributorService.getContributors();
+        const eventId = req.params.eventId;
 
-        return res.status(200).json(Contributor);
+        const contributors = await ContributorService.getContributorsByEventId(eventId);
+
+        return res.status(200).json(contributors);
     } catch (e) {
         return res.status(400).json({
             ContributorMessage: 'Oops... Something went wrong, contact the admin...',
