@@ -2,6 +2,7 @@ import { getUserByPhoneNumber, getVendorUserByPhoneNumber } from '../users/user.
 import { USER_TYPES } from '../users/user.model';
 import jwt from 'jsonwebtoken';
 import { constants } from '../../config/constants';
+import { formatPhoneNumber } from '../../utils';
 
 export const login = async (body: any) => {
     try {
@@ -10,7 +11,7 @@ export const login = async (body: any) => {
 
         const { phoneNumber, password } = body;
 
-        const user = await getUserByPhoneNumber(phoneNumber);
+        const user = await getUserByPhoneNumber(formatPhoneNumber(phoneNumber));
 
         if (user && user.comparePassword(password) && user.type === USER_TYPES.USER) {
             const authUser = user.toJSON();

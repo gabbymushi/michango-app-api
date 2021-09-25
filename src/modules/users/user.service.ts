@@ -1,3 +1,4 @@
+import { formatPhoneNumber } from '../../utils';
 import { IUser, User } from './user.model';
 import * as userRepository from './user.repository';
 
@@ -5,6 +6,7 @@ export const createUser = async (body: any) => {
     const session = await User.startSession();
     session.startTransaction();
     try {
+        body.phoneNumber = formatPhoneNumber(body.phoneNumber);
 
         const user = await userRepository.createUser(body, session);
 
