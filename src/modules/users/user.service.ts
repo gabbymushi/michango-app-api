@@ -8,6 +8,10 @@ export const createUser = async (body: any) => {
     try {
         body.phoneNumber = formatPhoneNumber(body.phoneNumber);
 
+        if (await getUserByPhoneNumber(body.phoneNumber)) {
+            throw new Error('You already have an account, please use your phone number to login or choose forgot password to recover your password.');
+        }
+
         const user = await userRepository.createUser(body, session);
 
         await session.commitTransaction();
