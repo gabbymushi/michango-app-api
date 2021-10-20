@@ -55,12 +55,10 @@ export const getUser = async (userId: any) => {
 
 export const deleteUser = async (userId: string) => {
     return await userRepository.deleteUser(userId);
-
 }
 
 export const updateUser = async (userId: string, body: IUser) => {
     return await userRepository.updateUser(userId, body);
-
 }
 
 export const getUserByPhoneNumber = async (phoneNumber: any) => {
