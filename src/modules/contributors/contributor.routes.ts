@@ -7,6 +7,7 @@ router.get('/phone-number', ContributorController.getContributorByPhoneNumber);
 //router.get('/', ContributorController.getContributors);
 router.get('/:id', ContributorController.getContributor);
 router.post('/', ContributorController.createContributor);
+router.patch('/:id/contribute', ContributorController.contribute);
 router.patch('/:id', ContributorController.updateContributor);
 router.delete('/:id', ContributorController.deleteContributor);
 

@@ -6,7 +6,7 @@ export const createContributor = async (body: any) => {
     session.startTransaction();
     try {
 
-        const Contributor = await ContributorRepository.createContributor(body, session);
+        const contributor = await ContributorRepository.createContributor(body, session);
 
         await session.commitTransaction();
         session.endSession();
@@ -18,6 +18,18 @@ export const createContributor = async (body: any) => {
 
         throw new Error(e.message);
     }
+}
+
+export const contribute = async (id: string, amount: number) => {
+    const contributor = await ContributorRepository.getContributor(id);
+
+    if (!contributor) {
+        throw new Error('Contributor not found');
+    }
+
+    const paidAmount = Number(amount) + Number(contributor.paidAmount);
+
+    return ContributorRepository.contribute(id, amount, paidAmount);
 }
 
 export const createAdmin = async (body: any) => {

@@ -73,6 +73,22 @@ export const updateContributor = async (req: Request, res: Response) => {
     }
 }
 
+export const contribute = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const amount= req.body.amount;
+        
+        const Contributor = await ContributorService.contribute(id, amount);
+
+        return res.status(200).json(Contributor);
+    } catch (e) {
+        return res.status(400).json({
+            ContributorMessage: 'Oops... Something went wrong, contact the admin...',
+            developerMessage: e.message
+        });
+    }
+}
+
 export const getContributorByPhoneNumber = async (req: Request, res: Response) => {
     try {
         const { phoneNumber } = req.query;

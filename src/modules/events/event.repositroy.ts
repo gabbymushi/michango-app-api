@@ -24,7 +24,8 @@ export const getEvents = async (keyword: string) => {
 
 export const getEventsByOwnerId = async (ownerId: string) => {
     try {
-        const events = await Event.find({ owners: ownerId });
+        const events = await Event.find({ owners: ownerId })
+            .sort({ createdAt: -1 });
 
         return events;
     } catch (e) {
