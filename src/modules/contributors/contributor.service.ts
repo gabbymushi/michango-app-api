@@ -4,6 +4,7 @@ import * as ContributorRepository from './contributor.repository';
 export const createContributor = async (body: any) => {
     const session = await Contributor.startSession();
     session.startTransaction();
+   
     try {
 
         const contributor = await ContributorRepository.createContributor(body, session);
@@ -11,7 +12,7 @@ export const createContributor = async (body: any) => {
         await session.commitTransaction();
         session.endSession();
 
-        return Contributor;
+        return contributor;
     } catch (e) {
         await session.abortTransaction();
         session.endSession();
@@ -22,7 +23,7 @@ export const createContributor = async (body: any) => {
 
 export const contribute = async (id: string, amount: number) => {
     const contributor = await ContributorRepository.getContributor(id);
-
+    
     if (!contributor) {
         throw new Error('Contributor not found');
     }
@@ -37,12 +38,12 @@ export const createAdmin = async (body: any) => {
     session.startTransaction();
 
     try {
-        const Contributor = await ContributorRepository.createContributor(body, session);
+        const contributor = await ContributorRepository.createContributor(body, session);
 
         await session.commitTransaction();
         session.endSession();
 
-        return Contributor;
+        return contributor;
     } catch (e) {
         await session.abortTransaction();
         session.endSession();

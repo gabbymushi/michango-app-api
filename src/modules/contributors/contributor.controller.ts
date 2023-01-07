@@ -4,9 +4,9 @@ import * as ContributorService from './contributor.service';
 export const createContributor = async (req: Request, res: Response) => {
     try {
         const { body } = req;
-        const Contributor = await ContributorService.createContributor(body);
+        const contributor = await ContributorService.createContributor(body);
 
-        return res.status(200).json(Contributor);
+        return res.status(200).json(contributor);
     } catch (e) {
         return res.status(400).json({
             ContributorMessage: 'Oops... Something went wrong, contact the admin...',
