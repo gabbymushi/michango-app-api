@@ -4,9 +4,9 @@ import * as ContributorService from './contributor.service';
 export const createContributor = async (req: Request, res: Response) => {
     try {
         const { body } = req;
-        const Contributor = await ContributorService.createContributor(body);
+        const contributor = await ContributorService.createContributor(body);
 
-        return res.status(200).json(Contributor);
+        return res.status(200).json(contributor);
     } catch (e) {
         return res.status(400).json({
             ContributorMessage: 'Oops... Something went wrong, contact the admin...',
@@ -63,6 +63,22 @@ export const updateContributor = async (req: Request, res: Response) => {
         const { id } = req.params;
         const { body } = req;
         const Contributor = await ContributorService.updateContributor(id, body);
+
+        return res.status(200).json(Contributor);
+    } catch (e) {
+        return res.status(400).json({
+            ContributorMessage: 'Oops... Something went wrong, contact the admin...',
+            developerMessage: e.message
+        });
+    }
+}
+
+export const contribute = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const amount= req.body.amount;
+        
+        const Contributor = await ContributorService.contribute(id, amount);
 
         return res.status(200).json(Contributor);
     } catch (e) {

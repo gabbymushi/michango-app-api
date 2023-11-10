@@ -9,7 +9,7 @@ export const createEvent = async (req: Request, res: Response) => {
         return res.status(200).json(Event);
     } catch (e) {
         return res.status(400).json({
-            userMessage: 'Oops... Something went wrong, contact the admin...',
+            userMessage: e.message,
             developerMessage: e.message
         });
     }

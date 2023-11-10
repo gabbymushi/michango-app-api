@@ -12,12 +12,29 @@ export const createContributor = async (body: IContributor, session: ClientSessi
 }
 
 export const getContributorsByEventId = (event: string) => {
-    return Contributor.find({ event });
+    return Contributor.find({ event })
+        .sort({ fullName: 1 });
 }
 
 export const getContributor = async (ContributorId: string) => {
     try {
         const contributor = await Contributor.findOne({ _id: ContributorId });
+
+        return contributor;
+    } catch (e) {
+        throw new Error(e.message);
+    }
+}
+
+export const contribute = async (id: string, amount: number, paidAmount: number) => {
+    try {
+        const contributor = await Contributor.findOneAndUpdate(
+            { _id: id },
+            {
+                paidAmount, $push: {
+                    transactions: { amount: amount }
+                }
+            });
 
         return contributor;
     } catch (e) {

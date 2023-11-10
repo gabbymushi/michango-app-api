@@ -11,6 +11,18 @@ export interface IContributor extends Document {
     paidAmount: number
 }
 
+export interface ITransaction extends Document {
+    amount: Number,
+}
+
+const TransactionSchema = new Schema<ITransaction>({
+    amount: {
+        type: Number
+    }
+},
+    { timestamps: true }
+);
+
 const ContributorSchema = new Schema<IContributor>({
     event: {
         type: Types.ObjectId,
@@ -41,7 +53,8 @@ const ContributorSchema = new Schema<IContributor>({
     email: {
         type: String,
         index: true
-    }
+    },
+    transactions: [TransactionSchema]
 },
     { timestamps: true }
 );

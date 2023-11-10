@@ -1,3 +1,4 @@
+import { formatPhoneNumber } from '../../utils';
 import { IUser, User } from './user.model';
 import * as userRepository from './user.repository';
 
@@ -5,6 +6,11 @@ export const createUser = async (body: any) => {
     const session = await User.startSession();
     session.startTransaction();
     try {
+        body.phoneNumber = formatPhoneNumber(body.phoneNumber);
+
+        if (await getUserByPhoneNumber(body.phoneNumber)) {
+            throw new Error('You already have an account, please use your phone number to login or choose forgot password to recover your password.');
+        }
 
         const user = await userRepository.createUser(body, session);
 
@@ -49,12 +55,10 @@ export const getUser = async (userId: any) => {
 
 export const deleteUser = async (userId: string) => {
     return await userRepository.deleteUser(userId);
-
 }
 
 export const updateUser = async (userId: string, body: IUser) => {
     return await userRepository.updateUser(userId, body);
-
 }
 
 export const getUserByPhoneNumber = async (phoneNumber: any) => {
